@@ -1,0 +1,93 @@
+
+application {
+  config {
+    baseName gateWay,
+    applicationType gateway,
+    packageName com.yinhaos,
+    authenticationType jwt,
+    prodDatabaseType no,
+    cacheProvider redis,
+    serverPort 9000
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName user,
+    applicationType microservice,
+    packageName com.yinhaos,
+    authenticationType no,
+    prodDatabaseType mysql,
+    serverPort 9001
+  }
+  entities User, UserResource
+}
+
+application {
+  config {
+    baseName admin,
+    applicationType microservice,
+    packageName com.yinhaos,
+    authenticationType no,
+    prodDatabaseType mysql,
+    serverPort 9002
+  }
+  entities Member
+}
+
+application {
+  config {
+    baseName demo,
+    applicationType microservice,
+    packageName com.yinhaos,
+    authenticationType no,
+    prodDatabaseType mysql,
+    serverPort 9003
+  }
+  entities Demo
+}
+
+application {
+  config {
+    baseName websocket,
+    applicationType microservice,
+    packageName com.yinhaos,
+    authenticationType no,
+    prodDatabaseType mysql,
+    websocket spring-websocket,
+    serverPort 9004
+  }
+}
+
+entity User {
+	Id Integer
+    name String
+    password String
+    createTime ZonedDateTime
+    updateTime ZonedDateTime
+}
+
+entity UserResource {
+	id Integer
+    userId Integer
+    type Integer
+    createTime ZonedDateTime
+    updateTime ZonedDateTime
+}
+
+entity Member {
+	id Integer
+    createTime ZonedDateTime
+    updateTime ZonedDateTime
+}
+
+entity Demo {
+	id Integer
+    name String
+}
+
+relationship OneToMany {
+  User to UserResource
+}
+    
